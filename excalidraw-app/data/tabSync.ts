@@ -10,7 +10,15 @@ const LOCAL_STATE_VERSIONS = {
 type BrowserStateTypes = keyof typeof LOCAL_STATE_VERSIONS;
 
 export const isBrowserStorageStateNewer = (type: BrowserStateTypes) => {
-  const storageTimestamp = JSON.parse(localStorage.getItem(type) || "-1");
+  let storageTimestamp: number = -1;
+  try {
+    const raw = localStorage.getItem(type);
+    if (raw != null) {
+      storageTimestamp = JSON.parse(raw);
+    }
+  } catch {
+    storageTimestamp = -1;
+  }
   return storageTimestamp > LOCAL_STATE_VERSIONS[type];
 };
 

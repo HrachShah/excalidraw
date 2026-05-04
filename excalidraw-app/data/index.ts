@@ -191,8 +191,12 @@ const legacy_decodeFromBackend = async ({
   const string = new window.TextDecoder("utf-8").decode(
     new Uint8Array(decrypted),
   );
-  const data: ImportedDataState = JSON.parse(string);
-
+  let data: ImportedDataState;
+  try {
+    data = JSON.parse(string);
+  } catch (error) {
+    throw new Error(`Failed to parse imported scene data: ${error}`);
+  }
   return {
     elements: data.elements || null,
     appState: data.appState || null,

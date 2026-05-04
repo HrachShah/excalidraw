@@ -263,8 +263,12 @@ export class LibraryLocalStorageMigrationAdapter {
       STORAGE_KEYS.__LEGACY_LOCAL_STORAGE_LIBRARY,
     );
     if (LSData != null) {
-      const libraryItems: ImportedDataState["libraryItems"] =
-        JSON.parse(LSData);
+      let libraryItems: ImportedDataState["libraryItems"];
+      try {
+        libraryItems = JSON.parse(LSData);
+      } catch {
+        return null;
+      }
       if (libraryItems) {
         return { libraryItems };
       }
