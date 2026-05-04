@@ -112,6 +112,18 @@ export class FileManager {
       }
     }
 
+    // If nothing to save, still update savedFiles map so existing entries
+    // are not treated as unsaved on subsequent calls
+    if (addedFiles.size === 0) {
+      for (const element of elements) {
+        if (isInitializedImageElement(element) && files[element.fileId]) {
+          const fileData = files[element.fileId];
+          this.savedFiles.set(element.fileId, this.getFileVersion(fileData));
+        }
+      }
+      return { savedFiles: new Map(), erroredFiles: new Map() };
+    }
+
     try {
       const { savedFiles, erroredFiles } = await this._saveFiles({
         addedFiles,
