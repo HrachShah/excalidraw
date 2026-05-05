@@ -277,6 +277,9 @@ export const exportToBackend = async (
       method: "POST",
       body: payload.buffer,
     });
+    if (!response.ok) {
+      return { url: null, errorMessage: t("alerts.couldNotCreateShareableLink") };
+    }
     const json = await response.json();
     if (json.id) {
       const url = new URL(window.location.href);
