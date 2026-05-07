@@ -221,7 +221,7 @@ export const parseLibraryJSON = (
   let data: ImportedLibraryData | undefined;
   try {
     data = JSON.parse(json);
-  } catch {
+  } catch (err) {
     throw new Error("Error: invalid file");
   }
   if (!isValidLibrary(data)) {

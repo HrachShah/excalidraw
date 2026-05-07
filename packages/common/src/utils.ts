@@ -1220,7 +1220,7 @@ export const isAnyTrue = (...args: boolean[]): boolean =>
 export const safelyParseJSON = (json: string): Record<string, any> | null => {
   try {
     return JSON.parse(json);
-  } catch {
+  } catch (err) {
     return null;
   }
 };

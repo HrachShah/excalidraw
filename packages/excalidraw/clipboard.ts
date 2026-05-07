@@ -357,7 +357,7 @@ const parseClipboardEventTextData = async (
       type: "text",
       value: (dataList.getData(MIME_TYPES.text) || "").trim(),
     };
-  } catch {
+  } catch (err) {
     return { type: "text", value: "" };
   }
 };

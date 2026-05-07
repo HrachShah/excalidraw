@@ -171,7 +171,7 @@ const getLineCaretOffsetFromNativeLayout = ({
 
       positions.push(caretRect.left);
     }
-  } catch {
+  } catch (err) {
     return null;
   } finally {
     mirror.remove();
@@ -573,7 +573,7 @@ export const textWysiwyg = ({
           // if excalidraw elements don't contain any text elements,
           // don't paste anything
           return;
-        } catch {
+        } catch (err) {
           console.warn("failed to parse excalidraw clipboard data");
         }
       }
