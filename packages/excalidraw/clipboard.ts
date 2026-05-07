@@ -534,21 +534,26 @@ export const parseClipboard = async (
     };
   }
 
+  let systemClipboardData: { type: string; elements?: any; files?: any } | null = null;
   try {
-    const systemClipboardData = JSON.parse(parsedEventData.value);
-    const programmaticAPI =
-      systemClipboardData.type === EXPORT_DATA_TYPES.excalidrawClipboardWithAPI;
-    if (clipboardContainsElements(systemClipboardData)) {
-      return {
-        elements: systemClipboardData.elements,
-        files: systemClipboardData.files,
-        text: isPlainPaste
-          ? JSON.stringify(systemClipboardData.elements, null, 2)
-          : undefined,
-        programmaticAPI,
-      };
-    }
-  } catch {}
+    systemClipboardData = JSON.parse(parsedEventData.value);
+  } catch (e) {
+    console.warn("Failed to parse clipboard data as JSON:", parsedEventData.value, e);
+    return { text: parsedEventData.value };
+  }
+
+  const programmaticAPI =
+    systemClipboardData.type === EXPORT_DATA_TYPES.excalidrawClipboardWithAPI;
+  if (clipboardContainsElements(systemClipboardData)) {
+    return {
+      elements: systemClipboardData.elements,
+      files: systemClipboardData.files,
+      text: isPlainPaste
+        ? JSON.stringify(systemClipboardData.elements, null, 2)
+        : undefined,
+      programmaticAPI,
+    };
+  }
 
   return { text: parsedEventData.value };
 };
