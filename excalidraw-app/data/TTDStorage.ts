@@ -30,7 +30,7 @@ export class TTDIndexedDBAdapter {
         TTDIndexedDBAdapter.store,
       );
       return data || [];
-    } catch (error) {
+    } catch (error: DOMException) {
       console.warn("Failed to load TTD chats from IndexedDB:", error);
       return [];
     }
@@ -43,7 +43,7 @@ export class TTDIndexedDBAdapter {
   static async saveChats(chats: SavedChats): Promise<void> {
     try {
       await set(TTDIndexedDBAdapter.key, chats, TTDIndexedDBAdapter.store);
-    } catch (error) {
+    } catch (error: DOMException) {
       console.warn("Failed to save TTD chats to IndexedDB:", error);
       throw error;
     }
