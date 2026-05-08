@@ -99,7 +99,7 @@ const saveDataStateToLocalStorage = (
     if (localStorageQuotaExceeded) {
       appJotaiStore.set(localStorageQuotaExceededAtom, false);
     }
-  } catch (error: any) {
+  } catch (error: DOMException) {
     // Unable to access window.localStorage
     console.error(error);
     if (isQuotaExceededError(error) && !localStorageQuotaExceeded) {
@@ -193,7 +193,7 @@ export class LocalData {
           try {
             // save loaded files back to storage with updated `lastRetrieved`
             setMany(filesToSave, filesStore);
-          } catch (error) {
+          } catch (error: DOMException) {
             console.warn(error);
           }
 
@@ -215,7 +215,7 @@ export class LocalData {
           try {
             await set(id, fileData, filesStore);
             savedFiles.set(id, fileData);
-          } catch (error: any) {
+          } catch (error: DOMException) {
             console.error(error);
             erroredFiles.set(id, fileData);
           }
