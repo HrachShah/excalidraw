@@ -21,7 +21,7 @@ export const defaultGetElementLinkFromSelection: Exclude<
     link.searchParams.set(ELEMENT_LINK_KEY, id);
 
     return normalizeLink(link.toString());
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(error);
   }
 
@@ -86,7 +86,7 @@ export const isElementLink = (url: string) => {
       _url.searchParams.has(ELEMENT_LINK_KEY) &&
       _url.host === window.location.host
     );
-  } catch (error) {
+  } catch (error: unknown) {
     return false;
   }
 };
@@ -98,7 +98,7 @@ export const parseElementLinkFromURL = (url: string) => {
       const id = searchParams.get(ELEMENT_LINK_KEY);
       return id;
     }
-  } catch (err) {}
+  } catch (error: unknown) {}
 
   return null;
 };
