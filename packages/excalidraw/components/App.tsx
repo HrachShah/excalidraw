@@ -4520,7 +4520,7 @@ class App extends React.Component<AppProps, AppState> {
             fileData.version = (fileData.version ?? 1) + 1;
             fileData.dataURL = restoredDataURL;
           }
-        } catch (error) {
+        } catch (error: unknown) {
           console.error(error);
         }
       }
