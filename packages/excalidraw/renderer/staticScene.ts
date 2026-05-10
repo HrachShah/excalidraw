@@ -472,7 +472,7 @@ const _renderStaticScene = ({
         renderConfig,
         appState,
       );
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
     }
   });
