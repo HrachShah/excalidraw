@@ -14,7 +14,7 @@ export const saveUsernameToLocalStorage = (username: string) => {
       STORAGE_KEYS.LOCAL_STORAGE_COLLAB,
       JSON.stringify({ username }),
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Unable to access window.localStorage
     console.error(error);
   }
@@ -26,7 +26,7 @@ export const importUsernameFromLocalStorage = (): string | null => {
     if (data) {
       return JSON.parse(data).username;
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Unable to access localStorage
     console.error(error);
   }
@@ -41,7 +41,7 @@ export const importFromLocalStorage = () => {
   try {
     savedElements = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE_ELEMENTS);
     savedState = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE_APP_STATE);
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Unable to access localStorage
     console.error(error);
   }
@@ -50,7 +50,7 @@ export const importFromLocalStorage = () => {
   if (savedElements) {
     try {
       elements = JSON.parse(savedElements);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       // Do nothing because elements array is already empty
     }
@@ -65,7 +65,7 @@ export const importFromLocalStorage = () => {
           JSON.parse(savedState) as Partial<AppState>,
         ),
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       // Do nothing because appState is already null
     }
@@ -78,7 +78,7 @@ export const getElementsStorageSize = () => {
     const elements = localStorage.getItem(STORAGE_KEYS.LOCAL_STORAGE_ELEMENTS);
     const elementsSize = elements?.length || 0;
     return elementsSize;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return 0;
   }
@@ -93,7 +93,7 @@ export const getTotalStorageSize = () => {
     const collabSize = collab?.length || 0;
 
     return appStateSize + collabSize + getElementsStorageSize();
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return 0;
   }
