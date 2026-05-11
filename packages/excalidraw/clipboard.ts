@@ -547,6 +547,8 @@ export const parseClipboard = async (
           : undefined,
         programmaticAPI,
       };
+    } catch (err) {
+      // JSON.stringify may throw for non-serializable objects
     }
   } catch {}
 
