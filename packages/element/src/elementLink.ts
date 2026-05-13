@@ -98,7 +98,10 @@ export const parseElementLinkFromURL = (url: string) => {
       const id = searchParams.get(ELEMENT_LINK_KEY);
       return id;
     }
-  } catch {}
+  } catch {
+    // new URL() throws TypeError for invalid URL strings — no point propagating
+    // since the only possible outcome is returning null
+  }
 
   return null;
 };

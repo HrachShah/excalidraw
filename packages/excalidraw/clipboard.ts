@@ -548,7 +548,10 @@ export const parseClipboard = async (
         programmaticAPI,
       };
     }
-  } catch {}
+  } catch {
+    // JSON.parse raises SyntaxError for malformed clipboard data; non-fatal,
+    // we fall back to treating the clipboard as plain text below
+  }
 
   return { text: parsedEventData.value };
 };
