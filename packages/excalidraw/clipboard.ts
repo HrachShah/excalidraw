@@ -357,7 +357,10 @@ const parseClipboardEventTextData = async (
       type: "text",
       value: (dataList.getData(MIME_TYPES.text) || "").trim(),
     };
-  } catch {
+  } catch (err: unknown) {
+    if (!(err instanceof Error)) {
+      throw err;
+    }
     return { type: "text", value: "" };
   }
 };
@@ -547,8 +550,11 @@ export const parseClipboard = async (
           : undefined,
         programmaticAPI,
       };
-    } catch (err) {
-      // JSON.stringify may throw for non-serializable objects
+    } catch (err: unknown) {
+      if (!(err instanceof Error)) {
+        throw err;
+      }
+      return { type: "text", value: "" };
     }
   } catch {}
 

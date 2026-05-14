@@ -17,8 +17,10 @@ export const QRCode = ({ value }: QRCodeProps) => {
         if (mounted) {
           try {
             setSvgData(generateQRCodeSVG(value));
-          } catch {
-            setError(true);
+          } catch (err: unknown) {
+            if (err instanceof Error) {
+              setError(true);
+            }
           }
         }
       })

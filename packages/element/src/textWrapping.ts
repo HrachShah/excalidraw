@@ -39,7 +39,10 @@ const getLineBreakRegex = () => {
   if (!cachedLineBreakRegex) {
     try {
       cachedLineBreakRegex = getLineBreakRegexAdvanced();
-    } catch {
+    } catch (err: unknown) {
+      if (!(err instanceof Error)) {
+        throw err;
+      }
       cachedLineBreakRegex = getLineBreakRegexSimple();
     }
   }

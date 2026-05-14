@@ -38,8 +38,10 @@ export const isRenderThrottlingEnabled = (() => {
   try {
     const version = ReactVersion.split(".");
     IS_REACT_18_AND_UP = Number(version[0]) > 17;
-  } catch {
-    IS_REACT_18_AND_UP = false;
+  } catch (err: unknown) {
+    if (!(err instanceof Error)) {
+      throw err;
+    }
   }
 
   let hasWarned = false;

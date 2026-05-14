@@ -28,7 +28,10 @@ export const toValidURL = (link: string) => {
 
   try {
     new URL(link);
-  } catch {
+  } catch (err: unknown) {
+    if (!(err instanceof Error)) {
+      throw err;
+    }
     // if link does not parse as URL, assume invalid and return blank page
     return "about:blank";
   }

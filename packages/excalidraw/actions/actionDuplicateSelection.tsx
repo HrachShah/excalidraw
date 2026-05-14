@@ -55,8 +55,10 @@ export const actionDuplicateSelection = register({
           appState: newAppState,
           captureUpdate: CaptureUpdateAction.IMMEDIATELY,
         };
-      } catch {
-        return false;
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          return false;
+        }
       }
     }
 
