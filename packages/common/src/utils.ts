@@ -1323,8 +1323,13 @@ export const setFeatureFlag = <F extends keyof FEATURE_FLAGS>(
       FEATURE_FLAGS_STORAGE_KEY,
       JSON.stringify(featureFlags),
     );
-  } catch (e) {
-    console.error("unable to set feature flag", e);
+  } catch (err) {
+    // JSON.stringify raises TypeError for circular refs or non-serializable values;
+    // localStorage.setItem raises DOMException (QuotaExceededError, SecurityError)
+    if (!(err instanceof TypeError) && !(err instanceof DOMException)) {
+      throw err;
+    }
+    console.error("unable to set feature flag", err);
   }
 };
 
