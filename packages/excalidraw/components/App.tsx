@@ -872,7 +872,12 @@ class App extends React.Component<AppProps, AppState> {
     let data = null;
     try {
       data = JSON.parse(event.data);
-    } catch (e) {}
+    } catch (e: unknown) {
+      if (e instanceof SyntaxError) {
+        console.error("unable to parse clipboard event data", e);
+      }
+      // other error types indicate a programming mistake — let them propagate
+    }
     if (!data) {
       return;
     }
