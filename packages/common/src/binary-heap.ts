@@ -105,6 +105,10 @@ export class BinaryHeap<T> {
   }
 
   rescoreElement(node: T) {
-    this.sinkDown(this.content.indexOf(node));
+    const idx = this.content.indexOf(node);
+    if (idx === -1) {
+      return;
+    }
+    this.sinkDown(idx);
   }
 }
