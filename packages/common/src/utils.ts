@@ -1015,7 +1015,13 @@ export const isMemberOf = <T extends string>(
     : collection.hasOwnProperty(value);
 };
 
-export const cloneJSON = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
+export const cloneJSON = <T>(obj: T): T => {
+  try {
+    return JSON.parse(JSON.stringify(obj));
+  } catch {
+    return obj;
+  }
+};
 
 export const updateStable = <T extends any[] | Record<string, any>>(
   prevValue: T,
