@@ -190,7 +190,9 @@ export const loadSceneOrLibraryFromBlob = async (
     if (error instanceof ImageSceneDataError) {
       throw error;
     }
-    throw new Error("Error: invalid file");
+    throw new Error(
+      error instanceof Error ? `Error: invalid file — ${error.message}` : "Error: invalid file",
+    );
   }
 };
 
