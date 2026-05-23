@@ -170,8 +170,8 @@ export const ExcalidrawPlusIframeExport = () => {
               token: event.data.jwt,
               publicKey: import.meta.env.VITE_APP_PLUS_EXPORT_PUBLIC_KEY,
             });
-          } catch (error: any) {
-            console.error(`Failed to verify JWT: ${error.message}`);
+          } catch (error: unknown) {
+            console.error(`Failed to verify JWT: ${(error as Error).message}`);
             throw new ExcalidrawError("Failed to verify JWT");
           }
 
