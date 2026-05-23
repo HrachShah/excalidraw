@@ -239,7 +239,7 @@ class Library {
           createLibraryUpdate(prevLibraryItems, nextLibraryItems),
           nextLibraryItems,
         );
-      } catch (error) {
+      } catch (error: unknown) {
         console.error(error);
       }
     }
