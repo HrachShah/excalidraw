@@ -222,6 +222,13 @@ export class LocalData {
         }),
       );
 
+      try {
+        // save loaded files back to storage with updated `lastRetrieved`
+        setMany(filesToSave, filesStore);
+      } catch (error: unknown) {
+        console.warn(error);
+      }
+
       return { savedFiles, erroredFiles };
     },
   });
