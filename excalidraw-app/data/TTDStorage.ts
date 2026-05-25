@@ -30,7 +30,7 @@ export class TTDIndexedDBAdapter {
         TTDIndexedDBAdapter.store,
       );
       return data || [];
-    } catch (error) {
+    } catch (error: unknown) {
       console.warn("Failed to load TTD chats from IndexedDB:", error);
       return [];
     }
