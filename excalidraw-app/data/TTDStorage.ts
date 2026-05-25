@@ -43,7 +43,7 @@ export class TTDIndexedDBAdapter {
   static async saveChats(chats: SavedChats): Promise<void> {
     try {
       await set(TTDIndexedDBAdapter.key, chats, TTDIndexedDBAdapter.store);
-    } catch (error) {
+    } catch (error: unknown) {
       console.warn("Failed to save TTD chats to IndexedDB:", error);
       throw error;
     }

@@ -187,7 +187,7 @@ export const ExcalidrawPlusIframeExport = () => {
           event.source!.postMessage(parsedSceneData, {
             targetOrigin: EXCALIDRAW_PLUS_ORIGIN,
           });
-        } catch (error) {
+        } catch (error: unknown) {
           const responseData: MESSAGE_ERROR = {
             type: "ERROR",
             message:
