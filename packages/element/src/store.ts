@@ -306,7 +306,7 @@ export class Store {
     for (const microAction of this.scheduledMicroActions) {
       try {
         microAction();
-      } catch (error) {
+      } catch (error: unknown) {
         console.error(`Failed to execute scheduled micro action`, error);
       }
     }
