@@ -40,7 +40,7 @@ export const trackEvent = (
         value,
       });
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("error during analytics", error);
   }
 };

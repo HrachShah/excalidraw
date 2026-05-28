@@ -254,7 +254,7 @@ const repairBinding = <T extends ExcalidrawArrowElement>(
     console.error(
       `Could not repair binding for element "${boundElement?.id}" out of (${elementsMap?.size}) elements`,
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error repairing binding:", error);
   }
 
@@ -683,7 +683,7 @@ export const restoreElements = <T extends ExcalidrawElement>(
             deleteInvisibleElements: opts?.deleteInvisibleElements,
           },
         );
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Error restoring element:", error);
         migratedElement = null;
       }
