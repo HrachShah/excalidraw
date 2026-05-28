@@ -457,7 +457,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
         new Uint8Array(decrypted),
       );
       return JSON.parse(decodedData);
-    } catch (error) {
+    } catch (error: unknown) {
       window.alert(t("alerts.decryptFailed"));
       console.error(error);
       return {

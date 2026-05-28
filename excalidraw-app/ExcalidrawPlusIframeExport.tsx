@@ -144,7 +144,7 @@ const verifyJWT = async ({
     if (parsedPayload.exp && parsedPayload.exp < currentTime) {
       throw new Error("JWT has expired");
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Failed to verify JWT:", error);
     throw new Error(error instanceof Error ? error.message : "Invalid JWT");
   }
@@ -187,7 +187,7 @@ export const ExcalidrawPlusIframeExport = () => {
           event.source!.postMessage(parsedSceneData, {
             targetOrigin: EXCALIDRAW_PLUS_ORIGIN,
           });
-        } catch (error) {
+        } catch (error: unknown) {
           const responseData: MESSAGE_ERROR = {
             type: "ERROR",
             message:
