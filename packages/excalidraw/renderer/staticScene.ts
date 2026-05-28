@@ -455,7 +455,7 @@ const _renderStaticScene = ({
         } else {
           render();
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error(error);
       }
     });

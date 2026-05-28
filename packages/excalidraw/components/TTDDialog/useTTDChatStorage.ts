@@ -58,7 +58,7 @@ export const useTTDChatStorage = ({
       const chats = await persistenceAdapter.loadChats();
       setSavedChats(chats);
       setChatsLoaded(true);
-    } catch (error) {
+    } catch (error: unknown) {
       console.warn("Failed to load chats:", error);
       setSavedChats([]);
       setChatsLoaded(true);
@@ -137,7 +137,7 @@ export const useTTDChatStorage = ({
 
     try {
       await persistenceAdapter.saveChats(updatedChats);
-    } catch (error) {
+    } catch (error: unknown) {
       console.warn("Failed to save chats:", error);
     }
   }, [chatHistory, setSavedChats, persistenceAdapter]);
@@ -163,7 +163,7 @@ export const useTTDChatStorage = ({
 
       try {
         await persistenceAdapter.saveChats(updatedChats);
-      } catch (error) {
+      } catch (error: unknown) {
         console.warn("Failed to save after delete:", error);
       }
 

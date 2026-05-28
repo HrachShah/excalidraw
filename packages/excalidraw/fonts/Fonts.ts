@@ -305,7 +305,7 @@ export class Fonts {
             const fontFaceTuple = [fontFaceOrder, fontFaceCSS] as const;
 
             return fontFaceTuple;
-          } catch (error) {
+          } catch (error: unknown) {
             console.error(
               `Couldn't transform font-face to css for family "${fontFace.fontFace.family}"`,
               error,
