@@ -172,7 +172,7 @@ export async function TTDStreamFetch(
             case "done":
               break;
           }
-        } catch (e) {
+        } catch (e: unknown) {
           console.warn("Failed to parse SSE data:", data, e);
         }
       }

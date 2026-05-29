@@ -157,7 +157,7 @@ export const exportCanvas = async (
       const svg = await svgPromise.then((svg) => svg.outerHTML);
       try {
         await copyTextToSystemClipboard(svg);
-      } catch (e) {
+      } catch (e: unknown) {
         throw new Error(t("errors.copyToSystemClipboardFailed"));
       }
       return;

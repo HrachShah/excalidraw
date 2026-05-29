@@ -70,7 +70,7 @@ export class ExcalidrawFontFace {
         );
 
         return base64;
-      } catch (e) {
+      } catch (e: unknown) {
         errorMessages.push(`"${url.toString()}" returned error "${e}"`);
       }
 

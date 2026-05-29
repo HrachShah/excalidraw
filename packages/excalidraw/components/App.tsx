@@ -872,7 +872,7 @@ class App extends React.Component<AppProps, AppState> {
     let data = null;
     try {
       data = JSON.parse(event.data);
-    } catch (e) {}
+    } catch (e: unknown) {}
     if (!data) {
       return;
     }

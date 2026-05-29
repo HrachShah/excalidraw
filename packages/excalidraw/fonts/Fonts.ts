@@ -256,7 +256,7 @@ export class Fonts {
             const fontFaces = await window.document.fonts.load(font, text);
 
             return [index, fontFaces];
-          } catch (e) {
+          } catch (e: unknown) {
             // don't let it all fail if just one font fails to load
             console.error(
               `Failed to load font "${font}" from urls "${Fonts.registered
