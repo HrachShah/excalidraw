@@ -239,7 +239,7 @@ class Library {
           createLibraryUpdate(prevLibraryItems, nextLibraryItems),
           nextLibraryItems,
         );
-      } catch (error) {
+      } catch (error: unknown) {
         console.error(error);
       }
     }
@@ -275,7 +275,7 @@ class Library {
         } else {
           resolve(cloneLibraryItems(libraryItems));
         }
-      } catch (error) {
+      } catch (error: unknown) {
         return resolve(this.currLibraryItems);
       }
     });
