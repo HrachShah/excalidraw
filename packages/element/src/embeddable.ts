@@ -63,7 +63,7 @@ const parseYouTubeLikeTimestamp = (url: string): number => {
     const urlObj = new URL(url.startsWith("http") ? url : `https://${url}`);
     timeParam =
       urlObj.searchParams.get("t") || urlObj.searchParams.get("start");
-  } catch (error) {
+  } catch (error: unknown) {
     const timeMatch = url.match(/[?&#](?:t|start)=([^&#\s]+)/);
     timeParam = timeMatch?.[1];
   }
@@ -125,7 +125,7 @@ const parseGoogleDriveVideoLink = (
       // normalize to seconds for a stable preview URL.
       timestamp: timestamp > 0 ? timestamp : undefined,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return null;
   }
 };
@@ -465,7 +465,7 @@ const matchHostname = (
     if (bareDomain === bareAllowedHostname) {
       return bareAllowedHostname;
     }
-  } catch (error) {
+  } catch (error: unknown) {
     // ignore
   }
   return null;

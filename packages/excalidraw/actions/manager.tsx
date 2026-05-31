@@ -43,7 +43,7 @@ const trackAction = (
           );
         }
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("error while logging action:", error);
     }
   }
