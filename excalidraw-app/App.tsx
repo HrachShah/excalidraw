@@ -313,7 +313,7 @@ const initializeScene = async (opts: {
       ) {
         return { scene: data, isExternalScene };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       return {
         scene: {
           appState: {
@@ -758,7 +758,7 @@ const ExcalidrawWrapper = () => {
       if (url) {
         setLatestShareableLink(url);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.name !== "AbortError") {
         const { width, height } = appState;
         console.error(error, {
@@ -1050,7 +1050,7 @@ const ExcalidrawWrapper = () => {
                   excalidrawAPI.getAppState(),
                   excalidrawAPI.getFiles(),
                 );
-              } catch (error: any) {
+              } catch (error: unknown) {
                 setErrorMessage(error.message);
               }
             }

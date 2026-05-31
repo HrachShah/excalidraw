@@ -79,7 +79,7 @@ const parseSceneData = async ({
       appState,
       files,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw error instanceof ExcalidrawError
       ? error
       : new ExcalidrawError("Failed to parse scene data.");
@@ -170,7 +170,7 @@ export const ExcalidrawPlusIframeExport = () => {
               token: event.data.jwt,
               publicKey: import.meta.env.VITE_APP_PLUS_EXPORT_PUBLIC_KEY,
             });
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error(`Failed to verify JWT: ${error.message}`);
             throw new ExcalidrawError("Failed to verify JWT");
           }

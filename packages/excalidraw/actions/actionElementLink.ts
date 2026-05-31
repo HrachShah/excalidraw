@@ -55,7 +55,7 @@ export const actionCopyElementLink = register({
           captureUpdate: CaptureUpdateAction.EVENTUALLY,
         };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
     }
 

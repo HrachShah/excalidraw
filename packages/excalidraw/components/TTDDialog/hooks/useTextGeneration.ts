@@ -193,7 +193,7 @@ export const useTextGeneration = ({
       try {
         await parseMermaidToExcalidraw(generatedResponse ?? "");
         trackEvent("ai", "mermaid parse success", "ttd");
-      } catch (error: any) {
+      } catch (error: unknown) {
         trackEvent("ai", "mermaid parse failed", "ttd");
         const _error = new Error(
           error.message || t("chat.errors.mermaidParseError"),
@@ -201,7 +201,7 @@ export const useTextGeneration = ({
         setAssistantError(_error.message, "parse");
         setError(_error);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       const _error = new Error(
         error.message || t("chat.errors.generationFailed"),
       );

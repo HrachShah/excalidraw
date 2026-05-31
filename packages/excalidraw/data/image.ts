@@ -62,7 +62,7 @@ export const decodePngMetadata = async (blob: Blob) => {
         throw new Error("FAILED");
       }
       return decode(encodedData);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       throw new Error("FAILED");
     }

@@ -372,7 +372,7 @@ const _renderStaticScene = ({
         if (!isExporting) {
           renderLinkIcon(element, context, appState, elementsMap);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error(
           error,
           element.id,

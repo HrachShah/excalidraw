@@ -34,7 +34,7 @@ export const actionCopy = register<ClipboardEvent | null>({
 
     try {
       await copyToClipboard(elementsToCopy, app.files, event);
-    } catch (error: any) {
+    } catch (error: unknown) {
       return {
         captureUpdate: CaptureUpdateAction.EVENTUALLY,
         appState: {
@@ -60,7 +60,7 @@ export const actionPaste = register({
     let types;
     try {
       types = await readSystemClipboard();
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.name === "AbortError" || error.name === "NotAllowedError") {
         // user probably aborted the action. Though not 100% sure, it's best
         // to not annoy them with an error message.
@@ -90,7 +90,7 @@ export const actionPaste = register({
 
     try {
       app.pasteFromClipboard(createPasteEvent({ types }));
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       return {
         captureUpdate: CaptureUpdateAction.EVENTUALLY,
@@ -173,7 +173,7 @@ export const actionCopyAsSvg = register({
         },
         captureUpdate: CaptureUpdateAction.EVENTUALLY,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       return {
         appState: {
@@ -233,7 +233,7 @@ export const actionCopyAsPng = register({
         },
         captureUpdate: CaptureUpdateAction.EVENTUALLY,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       return {
         appState: {

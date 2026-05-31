@@ -69,7 +69,7 @@ export const updateImageCache = async ({
               const image = await imagePromise;
 
               imageCache.set(fileId, { ...data, image });
-            } catch (error: any) {
+            } catch (error: unknown) {
               erroredFiles.set(fileId, true);
             }
           })(),

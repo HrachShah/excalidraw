@@ -108,7 +108,7 @@ export const encode = ({
   if (compress !== false) {
     try {
       deflated = toByteString(deflate(text));
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("encode: cannot deflate", error);
     }
   }
@@ -402,7 +402,7 @@ export const decompressData = async <T extends Record<string, any>>(
       /** data can be anything so the caller must decode it */
       data: contentsBuffer,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(
       `Error during decompressing and decrypting the file.`,
       encodingMetadata,

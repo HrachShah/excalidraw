@@ -97,7 +97,7 @@ const ActiveRoomDialog = ({
         text: t("roomDialog.shareTitle"),
         url: activeRoomLink,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Just ignore.
     }
   };

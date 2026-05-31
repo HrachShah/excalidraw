@@ -381,7 +381,7 @@ export const exportToSvg = async (
         // only the elements that we're exporting, and no extra.
         payload: serializeAsJSON(elements, appState, files || {}, "local"),
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
     }
   }
@@ -552,7 +552,7 @@ export const decodeSvgBase64Payload = ({ svg }: { svg: string }) => {
         throw new Error("FAILED");
       }
       return decode(encodedData);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       throw new Error("FAILED");
     }

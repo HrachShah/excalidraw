@@ -756,7 +756,7 @@ export const renderSceneToSvg = (
               renderConfig,
             );
           }
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error(error);
         }
       }
@@ -778,7 +778,7 @@ export const renderSceneToSvg = (
             element.y + renderConfig.offsetY,
             renderConfig,
           );
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error(error);
         }
       }

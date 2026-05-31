@@ -169,7 +169,7 @@ export const LibraryDropdownMenuButton: React.FC<{
         merge: true,
         openLibraryMenu: true,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error?.name === "AbortError") {
         console.warn(error);
         return;

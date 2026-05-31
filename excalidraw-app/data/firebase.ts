@@ -44,7 +44,7 @@ import type { Socket } from "socket.io-client";
 let FIREBASE_CONFIG: Record<string, any>;
 try {
   FIREBASE_CONFIG = JSON.parse(import.meta.env.VITE_APP_FIREBASE_CONFIG);
-} catch (error: any) {
+} catch (error: unknown) {
   console.warn(
     `Error JSON parsing firebase config. Supplied value: ${
       import.meta.env.VITE_APP_FIREBASE_CONFIG
@@ -162,7 +162,7 @@ export const saveFilesToFirebase = async ({
           cacheControl: `public, max-age=${FILE_CACHE_MAX_AGE_SEC}`,
         });
         savedFiles.push(id);
-      } catch (error: any) {
+      } catch (error: unknown) {
         erroredFiles.push(id);
       }
     }),
@@ -308,7 +308,7 @@ export const loadFilesFromFirebase = async (
         } else {
           erroredFiles.set(id, true);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         erroredFiles.set(id, true);
         console.error(error);
       }

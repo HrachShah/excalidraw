@@ -65,7 +65,7 @@ export const FilledButton = forwardRef<HTMLButtonElement, FilledButtonProps>(
         }, 50);
         try {
           await ret;
-        } catch (error: any) {
+        } catch (error: unknown) {
           if (!(error instanceof AbortError)) {
             throw error;
           } else {

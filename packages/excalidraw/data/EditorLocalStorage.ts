@@ -6,7 +6,7 @@ export class EditorLocalStorage {
   static has(key: typeof EDITOR_LS_KEYS[keyof typeof EDITOR_LS_KEYS]) {
     try {
       return !!window.localStorage.getItem(key);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(`localStorage.getItem error: ${error.message}`);
       return false;
     }
@@ -21,7 +21,7 @@ export class EditorLocalStorage {
         return JSON.parse(value) as T;
       }
       return null;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(`localStorage.getItem error: ${error.message}`);
       return null;
     }
@@ -34,7 +34,7 @@ export class EditorLocalStorage {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(`localStorage.setItem error: ${error.message}`);
       return false;
     }
@@ -45,7 +45,7 @@ export class EditorLocalStorage {
   ) => {
     try {
       window.localStorage.removeItem(name);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(`localStorage.removeItem error: ${error.message}`);
     }
   };

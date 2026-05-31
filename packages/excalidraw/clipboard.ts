@@ -113,7 +113,7 @@ export const createPasteEvent = ({
         if (event.clipboardData?.getData(type) !== value) {
           throw new Error(`Failed to set "${type}" as clipboardData item`);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw new Error(error.message);
       }
     }
@@ -130,7 +130,7 @@ export const createPasteEvent = ({
             `Failed to set file "${file.name}" as clipboardData item`,
           );
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         throw new Error(error.message);
       }
     }
@@ -242,7 +242,7 @@ const maybeParseHTMLDataItem = (
     if (content.length) {
       return { type: "mixedContent", value: content };
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`error in parseHTMLFromPaste: ${error.message}`);
   }
 
@@ -260,7 +260,7 @@ export const readSystemClipboard = async () => {
 
   try {
     clipboardItems = await navigator.clipboard?.read();
-  } catch (error: any) {
+  } catch (error: unknown) {
     try {
       if (navigator.clipboard?.readText) {
         console.warn(
@@ -271,7 +271,7 @@ export const readSystemClipboard = async () => {
           return { [MIME_TYPES.text]: readText };
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       // @ts-ignore
       if (navigator.clipboard?.read) {
         console.warn(
@@ -306,7 +306,7 @@ export const readSystemClipboard = async () => {
         } else {
           throw new ExcalidrawError(`Unsupported clipboard type: ${type}`);
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.warn(
           error instanceof ExcalidrawError
             ? error.message
@@ -568,7 +568,7 @@ export const copyBlobToClipboardAsPng = async (blob: Blob | Promise<Blob>) => {
         [MIME_TYPES.png]: blob,
       }),
     ]);
-  } catch (error: any) {
+  } catch (error: unknown) {
     // if we're using a Promise ClipboardItem, let's try constructing
     // with resolution value instead
     if (isPromiseLike(blob)) {
@@ -607,7 +607,7 @@ export const copyTextToSystemClipboard = async <
       }
       return;
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
   }
 
@@ -624,7 +624,7 @@ export const copyTextToSystemClipboard = async <
       // not focused
       await navigator.clipboard.writeText(plainTextEntry[1]);
       return;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
     }
   }
@@ -669,7 +669,7 @@ const copyTextViaExecCommand = (text: string | null) => {
     textarea.setSelectionRange(0, textarea.value.length);
 
     success = document.execCommand("copy");
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
   }
 

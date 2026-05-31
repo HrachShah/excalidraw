@@ -99,7 +99,7 @@ export const setLanguage = async (lang: Language) => {
   } else {
     try {
       currentLangData = await import(`./locales/${currentLang.code}.json`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(`Failed to load language ${lang.code}:`, error.message);
       currentLangData = fallbackLangData;
     }

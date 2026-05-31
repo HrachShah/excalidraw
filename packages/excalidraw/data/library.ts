@@ -341,7 +341,7 @@ class Library {
           } else {
             reject(new AbortError());
           }
-        } catch (error: any) {
+        } catch (error: unknown) {
           reject(error);
         }
       });
@@ -377,7 +377,7 @@ class Library {
         this.currLibraryItems = cloneLibraryItems(await libraryItems);
 
         resolve(this.currLibraryItems);
-      } catch (error: any) {
+      } catch (error: unknown) {
         reject(error);
       }
     })
@@ -555,7 +555,7 @@ class AdapterTransaction {
         try {
           const data = await adapter.load({ source });
           resolve(restoreLibraryItems(data?.libraryItems || [], "published"));
-        } catch (error: any) {
+        } catch (error: unknown) {
           reject(error);
         }
       });
@@ -733,7 +733,7 @@ export const useHandleLibrary = (
           const request = await fetch(libraryUrl);
           const blob = await request.blob();
           resolve(blob);
-        } catch (error: any) {
+        } catch (error: unknown) {
           reject(error);
         }
       });
@@ -758,7 +758,7 @@ export const useHandleLibrary = (
           defaultStatus: "published",
           openLibraryMenu: true,
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         excalidrawAPI.updateScene({
           appState: {
             errorMessage: error.message,
@@ -872,14 +872,14 @@ export const useHandleLibrary = (
                 );
                 try {
                   await migrationAdapter.clear();
-                } catch (error: any) {
+                } catch (error: unknown) {
                   console.error(
                     `couldn't delete legacy library data: ${error.message}`,
                   );
                 }
                 // migration suceeded, load migrated data
                 return nextItems;
-              } catch (error: any) {
+              } catch (error: unknown) {
                 console.error(
                   `couldn't migrate legacy library data: ${error.message}`,
                 );
@@ -961,7 +961,7 @@ export const useHandleLibrary = (
                 await persistLibraryUpdate(adapter, update);
               }
             }
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error(
               `couldn't persist library update: ${error.message}`,
               update,

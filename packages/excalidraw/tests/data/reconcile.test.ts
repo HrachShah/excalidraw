@@ -112,7 +112,7 @@ const test = <U extends `${string}:${"L" | "R"}`>(
       reconciledIds,
       "convergent reconciliation",
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("local original", _remote);
     console.error("remote original", _local);
     throw error;
@@ -129,7 +129,7 @@ const test = <U extends `${string}:${"L" | "R"}`>(
       reconciledIds,
       "local re-reconciliation",
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("local original", _remote);
     console.error("remote reconciled", reconciled);
     throw error;

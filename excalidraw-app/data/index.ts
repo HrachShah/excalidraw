@@ -181,7 +181,7 @@ const legacy_decodeFromBackend = async ({
     const iv = buffer.slice(0, IV_LENGTH_BYTES);
     const encrypted = buffer.slice(IV_LENGTH_BYTES, buffer.byteLength);
     decrypted = await decryptData(new Uint8Array(iv), encrypted, decryptionKey);
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Fixed IV (old format, backward compatibility)
     const fixedIv = new Uint8Array(IV_LENGTH_BYTES);
     decrypted = await decryptData(fixedIv, buffer, decryptionKey);
@@ -227,14 +227,14 @@ export const importFromBackend = async (
         elements: data.elements || null,
         appState: data.appState || null,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(
         "error when decoding shareLink data using the new format:",
         error,
       );
       return legacy_decodeFromBackend({ buffer, decryptionKey });
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     window.alert(t("alerts.importBackendFailed"));
     console.error(error);
     return {};
@@ -299,7 +299,7 @@ export const exportToBackend = async (
     }
 
     return { url: null, errorMessage: t("alerts.couldNotCreateShareableLink") };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
 
     return { url: null, errorMessage: t("alerts.couldNotCreateShareableLink") };

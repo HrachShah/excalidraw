@@ -86,7 +86,7 @@ const JSONExportModal = ({
                   trackEvent("export", "link", `ui (${getFrame()})`);
                   await onExportToBackend(elements, appState, files);
                   onCloseRequest();
-                } catch (error: any) {
+                } catch (error: unknown) {
                   setAppState({ errorMessage: error.message });
                 }
               }}

@@ -263,7 +263,7 @@ function prepareDataForJSONExport(
           },
         );
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error?.name === "AbortError") {
         // if abort error, assume it's a reaction on the signal being aborted
         console.warn(
@@ -350,7 +350,7 @@ export const actionSaveToActiveFile = register({
           },
         },
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       abortController.abort();
 
       if (error?.name !== "AbortError") {
@@ -402,7 +402,7 @@ export const actionSaveFileToDisk = register({
           toast: { message: t("toast.fileSaved"), duration: 3000 },
         },
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       abortController.abort();
       if (error?.name !== "AbortError") {
         console.error(error);
@@ -459,7 +459,7 @@ export const actionLoadScene = register({
         files,
         captureUpdate: CaptureUpdateAction.IMMEDIATELY,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error?.name === "AbortError") {
         console.warn(error);
         return false;

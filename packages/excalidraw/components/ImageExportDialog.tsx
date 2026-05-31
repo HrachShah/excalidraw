@@ -151,7 +151,7 @@ const ImageExportModal = ({
         // prevent preview and export (e.g. canvas too big).
         try {
           await canvasToBlob(canvas);
-        } catch (error: any) {
+        } catch (error: unknown) {
           if (error.name === "CANVAS_POSSIBLY_TOO_BIG") {
             throw new Error(t("canvasError.canvasTooBig"));
           }

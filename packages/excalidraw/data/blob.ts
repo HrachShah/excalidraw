@@ -35,7 +35,7 @@ const parseFileContents = async (blob: Blob | File): Promise<string> => {
   if (blob.type === MIME_TYPES.png) {
     try {
       return await (await import("./image")).decodePngMetadata(blob);
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.message === "INVALID") {
         throw new ImageSceneDataError(
           "Image doesn't contain scene",
@@ -64,7 +64,7 @@ const parseFileContents = async (blob: Blob | File): Promise<string> => {
         return decodeSvgBase64Payload({
           svg: contents,
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error.message === "INVALID") {
           throw new ImageSceneDataError(
             "Image doesn't contain scene",
@@ -148,7 +148,7 @@ export const loadSceneOrLibraryFromBlob = async (
   try {
     try {
       data = JSON.parse(contents);
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (isSupportedImageFile(blob)) {
         throw new ImageSceneDataError(
           "Image doesn't contain scene",
@@ -186,7 +186,7 @@ export const loadSceneOrLibraryFromBlob = async (
       };
     }
     throw new Error("Error: invalid file");
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof ImageSceneDataError) {
       throw error;
     }
@@ -249,7 +249,7 @@ export const canvasToBlob = async (
         }
         resolve(blob);
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       reject(error);
     }
   });
@@ -264,7 +264,7 @@ export const generateIdFromFile = async (file: File): Promise<FileId> => {
       await blobToArrayBuffer(file),
     );
     return bytesToHexString(new Uint8Array(hashBuffer)) as FileId;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     // length 40 to align with the HEX length of SHA-1 (which is 160 bit)
     return nanoid(40) as FileId;
@@ -373,7 +373,7 @@ export const ImageURLToFile = async (
   let response;
   try {
     response = await fetch(imageUrl);
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new Error("Error: failed to fetch image", { cause: "FETCH_ERROR" });
   }
 
@@ -405,7 +405,7 @@ export const getFileHandle = async (
         (await (dataTransferItem as any).getAsFileSystemHandle()) || null;
 
       return handle;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.warn(error.name, error.message);
       return null;
     }

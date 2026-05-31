@@ -1624,7 +1624,7 @@ const _renderInteractiveScene = ({
         appState,
         renderConfig.selectionColor,
       );
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
     }
   }

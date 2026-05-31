@@ -2596,7 +2596,7 @@ class App extends React.Component<AppProps, AppState> {
         frameElement,
         data: { status: "done", html: parsedHtml },
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       trackEvent("ai", "generate (failed)", "d2c");
       this.updateMagicGeneration({
         frameElement,
@@ -2904,7 +2904,7 @@ class App extends React.Component<AppProps, AppState> {
             console.error(error);
           });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
       initialData = {
         appState: {
@@ -3867,7 +3867,7 @@ class App extends React.Component<AppProps, AppState> {
           if ((await this.props.onPaste(data, event)) === false) {
             return;
           }
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error(error);
         }
       }
@@ -4055,7 +4055,7 @@ class App extends React.Component<AppProps, AppState> {
         imageURLs.map(async (url) => {
           try {
             return { file: await ImageURLToFile(url) };
-          } catch (error: any) {
+          } catch (error: unknown) {
             let errorMessage = error.message;
             if (error.cause === "FETCH_ERROR") {
               errorMessage = t("errors.failedToFetchImage");
@@ -4477,7 +4477,7 @@ class App extends React.Component<AppProps, AppState> {
         await webShareTargetCache.delete("shared-file");
         window.history.replaceState(null, APP_NAME, window.location.pathname);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       this.setState({ errorMessage: error.message });
     }
   };
@@ -11489,7 +11489,7 @@ class App extends React.Component<AppProps, AppState> {
           normalizeSVG(await imageFile.text()),
           imageFile.name,
         );
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.warn(error);
         throw new Error(t("errors.svgImageInsertError"));
       }
@@ -11514,7 +11514,7 @@ class App extends React.Component<AppProps, AppState> {
         imageFile = await resizeImageFile(imageFile, {
           maxWidthOrHeight: DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT,
         });
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error(
           "Error trying to resizing image file on insertion",
           error,
@@ -11584,7 +11584,7 @@ class App extends React.Component<AppProps, AppState> {
           }
 
           resolve(initializedImageElement);
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error(error);
           reject(new Error(t("errors.imageInsertError")));
         }
@@ -11631,7 +11631,7 @@ class App extends React.Component<AppProps, AppState> {
       });
 
       this.insertImages(imageFiles, x, y);
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.name !== "AbortError") {
         console.error(error);
       } else {
@@ -11821,7 +11821,7 @@ class App extends React.Component<AppProps, AppState> {
             placeholder,
             await normalizeFile(imageFiles[i]),
           );
-        } catch (error: any) {
+        } catch (error: unknown) {
           this.setState({
             errorMessage: error.message || t("errors.imageInsertError"),
           });
@@ -11894,7 +11894,7 @@ class App extends React.Component<AppProps, AppState> {
             captureUpdate: CaptureUpdateAction.IMMEDIATELY,
           });
           return;
-        } catch (error: any) {
+        } catch (error: unknown) {
           if (error.name !== "EncodingError") {
             throw new Error(t("alerts.couldNotLoadInvalidFile"));
           }
@@ -11948,7 +11948,7 @@ class App extends React.Component<AppProps, AppState> {
             files: null,
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         this.setState({ errorMessage: error.message });
       }
       return;
@@ -12000,7 +12000,7 @@ class App extends React.Component<AppProps, AppState> {
           elements,
           fileHandle,
         );
-      } catch (error: any) {
+      } catch (error: unknown) {
         const imageSceneDataError = error instanceof ImageSceneDataError;
         if (
           imageSceneDataError &&
@@ -12059,7 +12059,7 @@ class App extends React.Component<AppProps, AppState> {
             this.setState({ errorMessage: t("errors.importLibraryError") });
           });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       this.setState({ isLoading: false, errorMessage: error.message });
     }
   };
