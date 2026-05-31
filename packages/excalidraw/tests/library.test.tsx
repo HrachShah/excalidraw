@@ -31,7 +31,7 @@ const mockLibraryFilePromise = new Promise<Blob>(async (resolve, reject) => {
     resolve(
       new Blob([await libraryJSONPromise], { type: MIME_TYPES.excalidrawlib }),
     );
-  } catch (error) {
+  } catch (error: unknown) {
     reject(error);
   }
 });
