@@ -400,7 +400,7 @@ export const saveDebugState = (debug: { enabled: boolean }) => {
       STORAGE_KEYS.LOCAL_STORAGE_DEBUG,
       JSON.stringify(debug),
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
   }
 };
@@ -425,7 +425,7 @@ export const loadSavedDebugState = () => {
     if (savedDebugState) {
       debug = JSON.parse(savedDebugState) as { enabled: boolean };
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
   }
 
