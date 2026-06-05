@@ -1318,7 +1318,7 @@ export const setFeatureFlag = <F extends keyof FEATURE_FLAGS>(
       FEATURE_FLAGS_STORAGE_KEY,
       JSON.stringify(featureFlags),
     );
-  } catch (e) {
+  } catch (e: unknown) {
     console.error("unable to set feature flag", e);
   }
 };

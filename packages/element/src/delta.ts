@@ -697,7 +697,7 @@ export class AppStateDelta implements DeltaContainer<AppState> {
       );
 
       return [nextAppState, constainsVisibleChanges];
-    } catch (e) {
+    } catch (e: unknown) {
       // shouldn't really happen, but just in case
       console.error(`Couldn't apply appstate change`, e);
 
@@ -988,7 +988,7 @@ export class AppStateDelta implements DeltaContainer<AppState> {
         "lockedMultiSelections",
         (prevValue) => (prevValue ?? {}) as ValueOf<T["lockedMultiSelections"]>,
       );
-    } catch (e) {
+    } catch (e: unknown) {
       // if postprocessing fails it does not make sense to bubble up, but let's make sure we know about it
       console.error(`Couldn't postprocess appstate change deltas.`);
 
@@ -1426,7 +1426,7 @@ export class ElementsDelta implements DeltaContainer<SceneElementsMap> {
         ...updatedElements,
         ...affectedElements,
       ]);
-    } catch (e) {
+    } catch (e: unknown) {
       console.error(`Couldn't apply elements delta`, e);
 
       if (isTestEnv() || isDevEnv()) {
@@ -1450,7 +1450,7 @@ export class ElementsDelta implements DeltaContainer<SceneElementsMap> {
       );
 
       ElementsDelta.redrawElements(nextElements, changedElements);
-    } catch (e) {
+    } catch (e: unknown) {
       console.error(
         `Couldn't mutate elements after applying elements change`,
         e,
@@ -1902,7 +1902,7 @@ export class ElementsDelta implements DeltaContainer<SceneElementsMap> {
 
       // needs ordered nextElements to avoid z-index binding issues
       ElementsDelta.redrawBoundArrows(tempScene, changedElements);
-    } catch (e) {
+    } catch (e: unknown) {
       console.error(`Couldn't redraw elements`, e);
 
       if (isTestEnv() || isDevEnv()) {
@@ -2044,7 +2044,7 @@ export class ElementsDelta implements DeltaContainer<SceneElementsMap> {
         Reflect.deleteProperty(deleted, "points");
         Reflect.deleteProperty(inserted, "points");
       }
-    } catch (e) {
+    } catch (e: unknown) {
       // if postprocessing fails, it does not make sense to bubble up, but let's make sure we know about it
       console.error(`Couldn't postprocess elements delta.`);
 
