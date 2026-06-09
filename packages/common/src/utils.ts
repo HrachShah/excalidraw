@@ -1299,7 +1299,11 @@ export const getFeatureFlag = <F extends keyof FEATURE_FLAGS>(
         const flags = JSON.parse(serializedFlags);
         featureFlags = flags ?? DEFAULT_FEATURE_FLAGS;
       }
-    } catch {}
+    } catch (_error) {
+      // localStorage.getItem raises DOMException (SecurityError, QuotaExceeded)
+      // for locked-down storage, and JSON.parse raises SyntaxError for
+      // corrupted data. Either case just means "use the default flags".
+    }
   }
 
   return (featureFlags || DEFAULT_FEATURE_FLAGS)[flag];
