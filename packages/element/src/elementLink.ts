@@ -98,7 +98,11 @@ export const parseElementLinkFromURL = (url: string) => {
       const id = searchParams.get(ELEMENT_LINK_KEY);
       return id;
     }
-  } catch {}
+  } catch (_error) {
+    // new URL() throws TypeError for an unparseable url (we want to fall
+    // through and return null). Bind the unused error so future telemetry
+    // can log it without changing the call site.
+  }
 
   return null;
 };
