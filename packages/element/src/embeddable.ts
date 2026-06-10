@@ -82,7 +82,11 @@ const parseYouTubeLikeTimestamp = (url: string): number => {
   }
 
   const [, hours = "0", minutes = "0", seconds = "0"] = timeMatch;
-  return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+  return (
+    parseInt(hours, 10) * 3600 +
+    parseInt(minutes, 10) * 60 +
+    parseInt(seconds, 10)
+  );
 };
 
 const parseGoogleDriveVideoLink = (
