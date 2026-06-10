@@ -33,10 +33,10 @@ export const getScrollBars = (
   const viewportHeightWithZoom = viewportHeight / appState.zoom.value;
 
   const safeArea = {
-    top: parseInt(getGlobalCSSVariable("sat")) || 0,
-    bottom: parseInt(getGlobalCSSVariable("sab")) || 0,
-    left: parseInt(getGlobalCSSVariable("sal")) || 0,
-    right: parseInt(getGlobalCSSVariable("sar")) || 0,
+    top: parseInt(getGlobalCSSVariable("sat"), 10) || 0,
+    bottom: parseInt(getGlobalCSSVariable("sab"), 10) || 0,
+    left: parseInt(getGlobalCSSVariable("sal"), 10) || 0,
+    right: parseInt(getGlobalCSSVariable("sar"), 10) || 0,
   };
 
   const isRTL = getLanguage().rtl;
