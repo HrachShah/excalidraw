@@ -200,7 +200,7 @@ const MermaidToExcalidraw = ({
             }
           }
         }
-      } catch {
+      } catch (_error) {
         // ignore auto-fix probe errors
       }
       if (!cancelled) {
