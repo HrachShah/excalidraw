@@ -87,7 +87,7 @@ export const convertMermaidToExcalidraw = async ({
         ret = await api.parseMermaidToExcalidraw(
           mermaidDefinition.replace(/"/g, "'"),
         );
-      } catch {
+      } catch (err) {
         // Keep the original error so line/column references stay aligned with
         // the user's unmodified input.
         return { success: false, error: originalParseError };

@@ -218,7 +218,12 @@ export const parseLibraryJSON = (
   json: string,
   defaultStatus: LibraryItem["status"] = "unpublished",
 ) => {
-  const data: ImportedLibraryData | undefined = JSON.parse(json);
+  let data: ImportedLibraryData | undefined;
+  try {
+    data = JSON.parse(json);
+  } catch (err) {
+    throw new Error("Error: invalid file");
+  }
   if (!isValidLibrary(data)) {
     throw new Error("Invalid library");
   }

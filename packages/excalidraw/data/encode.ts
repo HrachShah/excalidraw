@@ -378,9 +378,16 @@ export const decompressData = async <T extends Record<string, any>>(
   // first chunk is encoding metadata (ignored for now)
   const [encodingMetadataBuffer, iv, buffer] = splitBuffers(bufferView);
 
-  const encodingMetadata: FileEncodingInfo = JSON.parse(
-    new TextDecoder().decode(encodingMetadataBuffer),
-  );
+  let encodingMetadata: FileEncodingInfo;
+  try {
+    encodingMetadata = JSON.parse(
+      new TextDecoder().decode(encodingMetadataBuffer),
+    );
+  } catch (err) {
+    throw new Error(
+      `Failed to parse encoding metadata: ${(err as Error).message}`,
+    );
+  }
 
   try {
     const [contentsMetadataBuffer, contentsBuffer] = splitBuffers(
@@ -392,9 +399,14 @@ export const decompressData = async <T extends Record<string, any>>(
       ),
     );
 
-    const metadata = JSON.parse(
-      new TextDecoder().decode(contentsMetadataBuffer),
-    ) as T;
+    let metadata: T;
+    try {
+      metadata = JSON.parse(
+        new TextDecoder().decode(contentsMetadataBuffer),
+      ) as T;
+    } catch (err) {
+      throw new Error(`Failed to parse contents metadata: ${(err as Error).message}`);
+    }
 
     return {
       /** metadata source is always JSON so we can decode it here */

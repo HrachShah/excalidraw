@@ -328,10 +328,11 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       if (this.isCollaborating() && storedElements) {
         this.handleRemoteSceneUpdate(this._reconcileElements(storedElements));
       }
-    } catch (error: any) {
-      const errorMessage = /is longer than.*?bytes/.test(error.message)
-        ? t("errors.collabSaveFailed_sizeExceeded")
-        : t("errors.collabSaveFailed");
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error && /is longer than.*?bytes/.test(error.message)
+          ? t("errors.collabSaveFailed_sizeExceeded")
+          : t("errors.collabSaveFailed");
 
       if (
         !this.state.dialogNotifiedErrors[errorMessage] ||
@@ -529,9 +530,9 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       );
 
       this.portal.socket.once("connect_error", fallbackInitializationHandler);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      this.setErrorDialog(error.message);
+      this.setErrorDialog(error instanceof Error ? error.message : String(error));
       return null;
     }
 
@@ -740,7 +741,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
             scrollToContent: true,
           };
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         // log the error and move on. other peers will sync us the scene.
         console.error(error);
       } finally {

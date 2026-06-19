@@ -112,7 +112,12 @@ const decryptElements = async (
   const decodedData = new TextDecoder("utf-8").decode(
     new Uint8Array(decrypted),
   );
-  return JSON.parse(decodedData);
+  try {
+    return JSON.parse(decodedData);
+  } catch (error: any) {
+    console.error("Error parsing Firebase scene data:", error);
+    throw error;
+  }
 };
 
 class FirebaseSceneVersionCache {

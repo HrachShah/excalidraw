@@ -1220,7 +1220,7 @@ export const isAnyTrue = (...args: boolean[]): boolean =>
 export const safelyParseJSON = (json: string): Record<string, any> | null => {
   try {
     return JSON.parse(json);
-  } catch {
+  } catch (err) {
     return null;
   }
 };
@@ -1299,7 +1299,7 @@ export const getFeatureFlag = <F extends keyof FEATURE_FLAGS>(
         const flags = JSON.parse(serializedFlags);
         featureFlags = flags ?? DEFAULT_FEATURE_FLAGS;
       }
-    } catch {}
+    } catch (err) {}
   }
 
   return (featureFlags || DEFAULT_FEATURE_FLAGS)[flag];

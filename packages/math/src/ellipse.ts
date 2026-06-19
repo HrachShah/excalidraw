@@ -57,6 +57,10 @@ export const ellipseIncludesPoint = <Point extends GlobalPoint | LocalPoint>(
   const normalizedX = (p[0] - center[0]) / halfWidth;
   const normalizedY = (p[1] - center[1]) / halfHeight;
 
+  if (!Number.isFinite(normalizedX) || !Number.isFinite(normalizedY)) {
+    return false;
+  }
+
   return normalizedX * normalizedX + normalizedY * normalizedY <= 1;
 };
 

@@ -147,33 +147,35 @@ export async function TTDStreamFetch(
           break;
         }
 
+        let chunk: StreamChunk;
         try {
-          const chunk: StreamChunk = JSON.parse(data);
-
-          if (chunk === null) {
-            break;
-          }
-
-          switch (chunk.type) {
-            case "content": {
-              const delta = chunk.delta;
-              if (delta) {
-                fullResponse += delta;
-                onChunk?.(delta);
-              }
-              break;
-            }
-            case "error":
-              error = new RequestError({
-                message: chunk.error.message,
-                status: 500,
-              });
-              break;
-            case "done":
-              break;
-          }
+          chunk = JSON.parse(data);
         } catch (e) {
           console.warn("Failed to parse SSE data:", data, e);
+          continue;
+        }
+
+        if (chunk === null) {
+          break;
+        }
+
+        switch (chunk.type) {
+          case "content": {
+            const delta = chunk.delta;
+            if (delta) {
+              fullResponse += delta;
+              onChunk?.(delta);
+            }
+            break;
+          }
+          case "error":
+            error = new RequestError({
+              message: chunk.error.message,
+              status: 500,
+            });
+            break;
+          case "done":
+            break;
         }
       }
     } catch (streamError: any) {
