@@ -791,7 +791,7 @@ export const isPrimitive = (val: any) => {
 export const getFrame = () => {
   try {
     return window.self === window.top ? "top" : "iframe";
-  } catch (error) {
+  } catch (error: unknown) {
     return "iframe";
   }
 };
@@ -1318,7 +1318,7 @@ export const setFeatureFlag = <F extends keyof FEATURE_FLAGS>(
       FEATURE_FLAGS_STORAGE_KEY,
       JSON.stringify(featureFlags),
     );
-  } catch (e) {
+  } catch (e: unknown) {
     console.error("unable to set feature flag", e);
   }
 };
